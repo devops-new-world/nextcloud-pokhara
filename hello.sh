@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ame: Deploy Nextcloud
 
 on:
@@ -15,3 +16,6 @@ jobs:
       - name: setup ssh host
         run: |
           echo "Hello...."
+=======
+khasi khasi
+>>>>>>> ac8c575b (khasi khasi)
