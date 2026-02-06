@@ -15,4 +15,3 @@ jobs:
       - name: setup ssh host
         run: |
           echo "Hello...."
-      
