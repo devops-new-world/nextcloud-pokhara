@@ -1,1 +1,2 @@
-Hello milan
+#!/bin/bash
+echo "Hello Milan Ad"
