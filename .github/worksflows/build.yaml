@@ -14,5 +14,5 @@ jobs:
         
       - name: setup ssh host
         run: |
-          echo "Hello.... darai sss"
+          echo "Hello....pokhara"
       
