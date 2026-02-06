@@ -3,7 +3,7 @@ name: Deploy Nextcloud
 on:
   push:
     branches:
-      - 'feature/nextcloud-pokhara'
+      - 'feature/nextcloud-roshan'
 
 jobs:
   build:
