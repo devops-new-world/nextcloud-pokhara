@@ -39,7 +39,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 54.204.180.99
-          username: mukta
+          username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY_MUKTA }}
           script: |
             cd /home/mukta/nextcloud-dev
