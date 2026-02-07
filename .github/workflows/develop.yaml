@@ -1,14 +1,16 @@
 name: Build and Deploy Nextcloud
 
+
 on:
   push:
     branches:
-      - nextcloud/milanad
+      - develop
+      - staging
+      - feature/milanad
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
@@ -23,15 +25,14 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME_MILANAD }}
-          password: ${{ secrets.DOCKERHUB_TOKEN_MILANAD }}
+          password: ${{ secrets.DOCKER_TOKEN_RAJAN }}
 
       - name: Build Docker image
         run: |
           docker build \
-            -t ${{ secrets.DOCKERHUB_USERNAME_MILANAD }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }} .
+           -t ${{ secrets.DOCKERHUB_USERNAME_MILANAD}}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }} \
+           .
 
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME_MILANAD }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }}
-
-
+          docker push ${{ secrets.DOCKERHUB_USERNAME_MILANAD}}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }}
