@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: nextcloud-mysql
+    restart: unless-stopped
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: ncuser
+      MYSQL_PASSWORD: ncpass
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - nextcloud-net
+
+  nextcloud:
+    image: nextcloud-apache:deps-only
+    container_name: nextcloud-apache
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - nextcloud-data:/var/www/nextcloud
+      - ./apache2/vhost-ssl.conf:/etc/apache2/sites-available/000-default.conf:ro
+      - ./letsencrypt/etc:/etc/letsencrypt:ro
+    networks:
+      - nextcloud-net
+
+networks:
+  nextcloud-net:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  nextcloud-data:
