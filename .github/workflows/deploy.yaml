@@ -30,10 +30,10 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t ${{ secrets.DOCKERHUB_USERNAME }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }} \
+            -t ${{ secrets.DOCKERHUB_USERNAME_NILAM }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }} \
             .
 
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME _NILAM}}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }}
           
