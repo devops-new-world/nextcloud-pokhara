@@ -25,7 +25,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME_PADAM }}
-          password: ${{ secrets.DOCKERHUB_TOKEN_PADAM }}
+          password: ${{ secrets.DOCKERHUN_TOKEN_PADAM }}
 
       - name: Build Docker image
         run: |
