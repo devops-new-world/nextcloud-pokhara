@@ -6,13 +6,12 @@ on:
       - develop
       - staging
       - feature/nextcloud-padam
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source 
+      - name: Checkout source
         uses: actions/checkout@v4
 
       - name: Extract short commit hash
@@ -29,10 +28,12 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t nextcloud-apache:latest .
+          docker build \
+            -t ${{ secrets.DOCKERHUB_USERNAME_PADAM }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }} \
+            .
 
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME_PADAM }}/nextcloud-apache:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME_PADAM }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }}
 
 
