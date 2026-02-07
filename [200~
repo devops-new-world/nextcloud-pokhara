@@ -1,17 +1,29 @@
-name: Deploy Nextcloud
+name: Deploy Nextcloud
 
 on:
   push:
     branches:
+<<<<<<< HEAD
+      - 'feature/nextcloud-rajan'
+=======
       - 'feature/nextcloud-nilam'
+>>>>>>> b1fa9529 (Docker built)
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
+        
       - name: setup ssh host
         run: |
           echo "Hello...."
+<<<<<<< HEAD
+          docker build  -t nextcloud .
+      
+
+=======
           docker build -t nextcloud .
+      
+>>>>>>> b1fa9529 (Docker built)
