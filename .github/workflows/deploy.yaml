@@ -26,19 +26,4 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME_BINAY }}/nextcloud-apache:latest
-
-      - name: Deploy to server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            cd ${{ secrets.DEPLOY_PATH }}
-            docker pull ${{ secrets.DOCKERHUB_USERNAME_BINAY }}/nextcloud-apache:latest
-            docker compose down
-            docker compose up -d
-
-
-
-#comment 
+ 
