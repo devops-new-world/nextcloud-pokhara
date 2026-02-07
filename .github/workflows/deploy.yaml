@@ -3,12 +3,14 @@ name: Build and Deploy Nextcloud
 on:
   push:
     branches:
-      - '*'
-
+      - develop
+      - staging
+      - feature/nextcloud-subash
+      
 jobs:
   build-and-deploy:
-  
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
@@ -34,3 +36,5 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }}
+
+
