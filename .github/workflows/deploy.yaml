@@ -17,11 +17,11 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME_BINAY }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_TOKEN_BINAY }}
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME_BINAY_BINAY }}/nextcloud-apache:latest .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME_BINAY }}/nextcloud-apache:latest .
 
       - name: Push Docker image
         run: |
