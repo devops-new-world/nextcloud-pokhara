@@ -29,8 +29,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t ${{ secrets.DOCKERHUB_USERNAME_MILANAD }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }} \
-            .
+            -t ${{ secrets.DOCKERHUB_USERNAME_MILANAD }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }} .
 
       - name: Push Docker image
         run: |
