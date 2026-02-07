@@ -3,7 +3,7 @@ name: Build and Deploy Nextcloud
 on:
   push:
     branches:
-      - nextcloud-pokhara/milanad
+      - '**'
 
 jobs:
   build-and-deploy:
