@@ -1,9 +1,10 @@
-ame: Deploy Nextcloud
+
+Name: Deploy Nextcloud
 
 on:
   push:
     branches:
-      - 'feature/nextcloud-laxman'
+      - 'feature/nextcloud-sijan'
 
 jobs:
   build:

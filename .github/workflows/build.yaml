@@ -3,7 +3,8 @@ name: Deploy Nextcloud
 on:
   push:
     branches:
-      - 'feature/nextcloud-rajan'
+      - 'feature/nextcloud-sijan'
+
 
 jobs:
   build:
@@ -15,6 +16,5 @@ jobs:
       - name: setup ssh host
         run: |
           echo "Hello...."
-          docker build  -t nextcloud .
-      
+docker build  -t nextcloud .
 
