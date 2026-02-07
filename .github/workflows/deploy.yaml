@@ -26,4 +26,4 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME_BINAY }}/nextcloud-apache:latest
- 
+ ##...
