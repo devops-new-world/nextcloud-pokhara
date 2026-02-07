@@ -1,4 +1,4 @@
-name: Deploy Nextcloud
+name: Deploy Nextcloud
 
 on:
   push:
