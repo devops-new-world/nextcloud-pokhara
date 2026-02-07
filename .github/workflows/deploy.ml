@@ -34,4 +34,3 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }}
-          
