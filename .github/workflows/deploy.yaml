@@ -38,8 +38,8 @@ jobs:
       - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SERVER_HOST_MUKTA }}
-          username: ${{ secrets.SERVER_USER }}
+          host: 54.204.180.99
+          username: mukta
           key: ${{ secrets.SERVER_SSH_KEY_MUKTA }}
           script: |
             cd /home/mukta/nextcloud-dev
