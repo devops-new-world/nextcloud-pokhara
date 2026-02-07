@@ -26,4 +26,16 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME_BINAY }}/nextcloud-apache:latest
- ##...
+      
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 54.204.180.99
+          username: ubuntu
+          key: ${{ secrets.SERVER_SSH_KEY_BINAY }}
+          script: |
+            cd /home/ubuntu/nextcloud-dev
+            docker pull ${{ secrets.DOCKERHUB_USERNAME_BINAY }}/nextcloud-apache:${{ steps.vars.outputs.TAG }}
+            echo "Deploying.."
+            sleep 5
+            echo done
