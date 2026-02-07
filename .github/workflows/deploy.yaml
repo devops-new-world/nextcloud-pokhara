@@ -27,7 +27,7 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME_DHURBA }}/nextcloud-apache:latest
 
- - name: Deploy to server
+      - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 54.204.180.99
