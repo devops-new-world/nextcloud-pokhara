@@ -5,7 +5,6 @@ on:
     branches:
       - 'feature/nextcloud-sijan'
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,5 +15,4 @@ jobs:
       - name: setup ssh host
         run: |
           echo "Hello...."
-docker build  -t nextcloud .
-
+      
