@@ -5,7 +5,7 @@ on:
     branches:
       - develop
       - staging
-      - feature/nextcloud-deepak
+      - feature/nextcloud-nilam
 
 jobs:
   build-and-deploy:
