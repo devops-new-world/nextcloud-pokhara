@@ -31,7 +31,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 RUN a2enmod rewrite headers env dir mime
 
 # ---- Copy Nextcloud application ----
-COPY nextcloud-src/ /var/www/nextcloud/
+COPY nextcloud/ /var/www/nextcloud/
 
 # ---- Permissions ----
 RUN chown -R www-data:www-data /var/www/nextcloud \
