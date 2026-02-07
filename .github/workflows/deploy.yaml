@@ -3,7 +3,7 @@ name: Build and Deploy Nextcloud
 on:
   push:
     branches:
-      - feature/nextcloud-dhurba
+      - feature/nextcloud-deepak-dev
 
 jobs:
   build-and-deploy:
@@ -16,13 +16,26 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME_DHURBA }}
-          password: ${{ secrets.DOCKERHUB_TOKEN_DHURBA }}
+          username: ${{ secrets.DOCKERHUB_USERNAME_DEEPAK }}
+          password: ${{ secrets.DOCKERHUB_TOKEN_DEEPAK }}
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME_DHURBA }}/nextcloud-apache:latest .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME_DEEPAK }}/nextcloud-apache:latest .
 
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME_DHURBA }}/nextcloud-apache:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME_DEEPAK }}/nextcloud-apache:latest
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 13.218.39.198
+          username: deepak
+          key: ${{ secrets.SERVER_SSH_KEY_DEEPAK }}
+          script: |
+            cd /home/deepak/nextcloud-dev
+            docker pull ${{ secrets.DOCKERHUB_USERNAME_DEEPAK }}/nextcloud-apache:${{ steps.vars.outputs.TAG }}
+            echo "Deploying.."
+            sleep 5
+            echo done
