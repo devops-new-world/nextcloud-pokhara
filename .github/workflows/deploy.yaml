@@ -3,7 +3,7 @@ name: Build and Deploy Nextcloud
 on:
   push:
     branches:
-      - main
+      - feature/nextcloud-binay-new
 
 jobs:
   build-and-deploy:
