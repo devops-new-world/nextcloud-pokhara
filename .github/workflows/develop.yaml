@@ -1,22 +1,40 @@
 name: Build and Deploy Nextcloud
 
-
 on:
- push:
-   branches:
-     - develop
-     - staging
-     - nextcloud-pokhara/milanad
-
+  push:
+    branches:
+      - nextcloud-pokhara/milanad
 
 jobs:
- build-and-deploy:
-   runs-on: ubuntu-latest
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
 
-   steps:
-     - name: Checkout source
-       uses: actions/checkout@v4
+      - name: Extract short commit hash
+        id: vars
+        run: |
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          echo "IMAGE_TAG=${SHORT_SHA}" >> $GITHUB_OUTPUT
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ DOCKERHUB_USERNAME_MILANAD }}
+          password: ${{ DOCKERHUB_TOKEN_MILANAD }}
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            -t ${{ DOCKERHUB_USERNAME_MILANAD }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }} \
+            .
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ DOCKERHUB_USERNAME_MILANAD }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }}
+
 
 
      - name: Extract short commit hash
@@ -29,20 +47,20 @@ jobs:
      - name: Login to Docker Hub
        uses: docker/login-action@v3
        with:
-         username: ${{ secrets.DOCKERHUB_USERNAME }}
-         password: ${{ secrets.DOCKERHUB_TOKEN }}
+         username: ${{ DOCKERHUB_USERNAME_MILANAD }}
+         password: ${{ DOCKERHUB_TOKEN_MILANAD }}
 
 
      - name: Build Docker image
        run: |
          docker build \
-          -t ${{ secrets.DOCKERHUB_USERNAME }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }} \
+          -t ${{ DOCKERHUB_USERNAME_MILANAD }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }} \
           .
 
 
      - name: Push Docker image
        run: |
-         docker push ${{ secrets.DOCKERHUB_USERNAME }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }}
+         docker push ${{ DOCKERHUB_USERNAME_MILANAD }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }}
 
 
     #  - name: Deploy to server
@@ -53,6 +71,6 @@ jobs:
     #      key: ${{ secrets.SERVER_SSH_KEY }}
     #      script: |
     #        cd ${{ secrets.DEPLOY_PATH }}
-    #       docker pull ${{ secrets.DOCKERHUB_USERNAME }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }}
+    #       docker pull ${{ DOCKERHUB_USERNAME_MILANAD }}/nextcloud-apache:${{ steps.vars.outputs.IMAGE_TAG }}
     #       docker compose down
     #       docker compose up -d
