@@ -44,7 +44,7 @@ jobs:
           username: nilam
           key: ${{ secrets.SERVER_SSH_KEY_NILAM }}
           script: |
-            cd ${{ secrets./home/nilam/nextcloud-dev }}
+            cd /home/nilam/nextcloud-dev
             docker pull ${{ secrets.DOCKERHUB_USERNAME_NILAM }}/nextcloud-apache:${{ steps.vars.outputs.TAG }}
             echo "Deploying.."
             sleep 5
